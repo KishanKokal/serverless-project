@@ -14,6 +14,9 @@ importers:
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
+      lambdafs:
+        specifier: ^2.1.1
+        version: 2.1.1
       puppeteer-core:
         specifier: ^23.9.0
         version: 23.9.0
