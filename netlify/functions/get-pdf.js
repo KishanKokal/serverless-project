@@ -1,4 +1,4 @@
-const chromium = require("chrome-aws-lambda");
+const chromium = require("@sparticuz/chromium");
 const puppeteer = require("puppeteer-core");
 
 exports.handler = async (event, context) => {
@@ -6,20 +6,22 @@ exports.handler = async (event, context) => {
   const page_url = JSON.parse(body).page_url;
   console.log(page_url);
   const browser = await puppeteer.launch({
-    args: [
-      "--disable-gpu",
-      "--disable-dev-shm-usage",
-      "--disable-setuid-sandbox",
-      "--no-first-run",
-      "--no-sandbox",
-      "--no-zygote",
-      "--deterministic-fetch",
-      "--disable-features=IsolateOrigins",
-      "--disable-site-isolation-trials",
-    ],
+    args: process.env.CHROME_EXECUTABLE_PATH
+      ? [
+          "--disable-gpu",
+          "--disable-dev-shm-usage",
+          "--disable-setuid-sandbox",
+          "--no-first-run",
+          "--no-sandbox",
+          "--no-zygote",
+          "--deterministic-fetch",
+          "--disable-features=IsolateOrigins",
+          "--disable-site-isolation-trials",
+        ]
+      : chromium.args,
     headless: true,
     executablePath:
-      process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath),
+      process.env.CHROME_EXECUTABLE_PATH || (await chromium.executablePath()),
   });
 
   const page = await browser.newPage();

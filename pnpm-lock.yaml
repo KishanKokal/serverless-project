@@ -8,15 +8,12 @@ importers:
 
   .:
     dependencies:
-      chrome-aws-lambda:
-        specifier: ^10.1.0
-        version: 10.1.0(puppeteer-core@23.9.0)
+      '@sparticuz/chromium':
+        specifier: ^131.0.0
+        version: 131.0.0
       dotenv:
         specifier: ^16.4.5
         version: 16.4.5
-      lambdafs:
-        specifier: ^2.1.1
-        version: 2.1.1
       puppeteer-core:
         specifier: ^23.9.0
         version: 23.9.0
@@ -27,6 +24,10 @@ packages:
     resolution: {integrity: sha512-0kdAbmic3J09I6dT8e9vE2JOCSt13wHCW5x/ly8TSt2bDtuIWe2TgLZZDHdcziw9AVCzflMAXCrVyRIhIs44Ng==}
     engines: {node: '>=18'}
     hasBin: true
+
+  '@sparticuz/chromium@131.0.0':
+    resolution: {integrity: sha512-0XkpNOL5HRxSTDNOfmuqQzEa//bQvZvX7hB8+aH5bfo4X4BVA36O72pIjL7voezodRLqfHfOKGDbgOD5BuEeUg==}
+    engines: {node: '>= 16'}
 
   '@tootallnate/quickjs-emscripten@0.23.0':
     resolution: {integrity: sha512-C5Mc6rdnsaJDjO3UpGW/CQTHtCKaYlScZTly4JIu97Jxo/odCiH0ITnDXSJPTOrEKk/ycSZ0AOgTmkDtkOsvIA==}
@@ -83,12 +84,6 @@ packages:
 
   buffer@5.7.1:
     resolution: {integrity: sha512-EHcyIPBQ4BSGlvjB16k5KgAJ27CIsHY/2JBmCRReo48y9rQ3MaUzWX3KVlBa4U7MyX02HdVj0K7C3WaB3ju7FQ==}
-
-  chrome-aws-lambda@10.1.0:
-    resolution: {integrity: sha512-NZQVf+J4kqG4sVhRm3WNmOfzY0OtTSm+S8rg77pwePa9RCYHzhnzRs8YvNI6L9tALIW6RpmefWiPURt3vURXcw==}
-    engines: {node: '>= 10.16'}
-    peerDependencies:
-      puppeteer-core: ^10.1.0
 
   chromium-bidi@0.8.0:
     resolution: {integrity: sha512-uJydbGdTw0DEUjhoogGveneJVWX/9YuqkWePzMmkBYwtdAqo5d3J/ovNKFr+/2hWXYmYCr6it8mSSTIj6SS6Ug==}
@@ -169,6 +164,15 @@ packages:
   fd-slicer@1.1.0:
     resolution: {integrity: sha512-cE1qsB/VwyQozZ+q1dGxR8LBYNZeofhEdUNGSMbQD3Gw2lAzX9Zb3uIU6Ebc/Fmyjo9AWWfnn0AUCHqtevs/8g==}
 
+  follow-redirects@1.15.9:
+    resolution: {integrity: sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+
   fs-extra@11.2.0:
     resolution: {integrity: sha512-PmDi3uwK5nFuXh7XDTlVnS17xJS7vW36is2+w3xcv8SVxiB4NyATf4ctkVY5bkSjX0Y4nbvZCq1/EjtEyr9ktw==}
     engines: {node: '>=14.14'}
@@ -212,13 +216,6 @@ packages:
 
   jsonfile@6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
-
-  lambdafs@2.1.1:
-    resolution: {integrity: sha512-x5k8JcoJWkWLvCVBzrl4pzvkEHSgSBqFjg3Dpsc4AcTMq7oUMym4cL/gRTZ6VM4mUMY+M0dIbQ+V1c1tsqqanQ==}
-    engines: {node: '>= 10.16'}
-    hasBin: true
-    bundledDependencies:
-      - tar-fs
 
   lru-cache@7.18.3:
     resolution: {integrity: sha512-jumlc0BIUrS3qJGgIkWZsyfAM7NCWiBcCDhnd+3NNM5KbBmLTgHVfWBcg6W+rLUsIpzpERPsvwUP7CckAQSOoA==}
@@ -391,6 +388,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
+  '@sparticuz/chromium@131.0.0':
+    dependencies:
+      follow-redirects: 1.15.9
+      tar-fs: 3.0.6
+    transitivePeerDependencies:
+      - debug
+
   '@tootallnate/quickjs-emscripten@0.23.0': {}
 
   '@types/node@22.9.3':
@@ -454,11 +458,6 @@ snapshots:
     dependencies:
       base64-js: 1.5.1
       ieee754: 1.2.1
-
-  chrome-aws-lambda@10.1.0(puppeteer-core@23.9.0):
-    dependencies:
-      lambdafs: 2.1.1
-      puppeteer-core: 23.9.0
 
   chromium-bidi@0.8.0(devtools-protocol@0.0.1367902):
     dependencies:
@@ -533,6 +532,8 @@ snapshots:
     dependencies:
       pend: 1.2.0
 
+  follow-redirects@1.15.9: {}
+
   fs-extra@11.2.0:
     dependencies:
       graceful-fs: 4.2.11
@@ -586,8 +587,6 @@ snapshots:
       universalify: 2.0.1
     optionalDependencies:
       graceful-fs: 4.2.11
-
-  lambdafs@2.1.1: {}
 
   lru-cache@7.18.3: {}
 
